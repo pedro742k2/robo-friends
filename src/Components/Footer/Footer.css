@@ -1,0 +1,30 @@
+.app-footer {
+  width: 100%;
+  background-color: rgba(40, 42, 54, 0.65);
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  box-shadow: rgba(255, 184, 108, 0.4) 0px -5px,
+    rgba(255, 184, 108, 0.3) 0px 10px, rgba(255, 184, 108, 0.2) 0px -15px,
+    rgba(255, 184, 108, 0.1) 0px -20px, rgba(255, 184, 108, 0.05) 0px -25px;
+}
+
+.app-footer h1 {
+  font-family: font-family, "tourney";
+  font-size: 2.5rem;
+  color: #ffb86c;
+  margin: 10px;
+}
+
+#signature {
+  font-family: "Fuggles";
+  font-size: 3.5rem;
+}
+
+.app-footer p {
+  font-size: 1rem;
+}

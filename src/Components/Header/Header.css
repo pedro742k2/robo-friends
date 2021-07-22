@@ -1,0 +1,43 @@
+.app-header {
+  background-color: rgba(40, 42, 54, 0.65);
+  width: 100%;
+  font-family: "tourney", cursive;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  box-shadow: rgba(255, 184, 108, 0.4) 0px 5px,
+    rgba(255, 184, 108, 0.3) 0px 10px, rgba(255, 184, 108, 0.2) 0px 15px,
+    rgba(255, 184, 108, 0.1) 0px 20px, rgba(255, 184, 108, 0.05) 0px 25px;
+}
+
+.header-title {
+  font-size: 5rem;
+  color: #ffb86c;
+  margin: 10px;
+}
+
+.robots-name-input {
+  width: 75%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #fff;
+
+  outline: none;
+  padding: 10px;
+  margin: 20px 0px;
+
+  border: 3px solid #ffb86c;
+  border-radius: 5px;
+
+  background-color: rgba(255, 184, 108, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.robots-name-input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 1; /* Firefox */
+}
