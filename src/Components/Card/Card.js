@@ -1,11 +1,28 @@
 import { Component, Fragment } from "react";
 import "./Card.css";
-import { robots } from "../../assets/robots";
+
+/* Robots api */
+import Robots from "../../Services/RobotsApi";
 
 class Cards extends Component {
-  changeRobots = () => {
-    const newRobots = robots.filter((robot) =>
-      robot.name.toLowerCase().includes(this.props.robotsInput.toLowerCase())
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      robots: [],
+    };
+  }
+
+  componentDidMount() {
+    Robots.then((resolvedRobots) => this.setState({ robots: resolvedRobots }));
+  }
+
+  filterRobots = () => {
+    const newRobots = this.state.robots.filter((robot) =>
+      robot.name
+        .toLowerCase()
+        .trim()
+        .includes(this.props.robotsInput.toLowerCase().trim())
     );
 
     return (
@@ -22,23 +39,7 @@ class Cards extends Component {
   };
 
   render() {
-    return (
-      <Fragment>
-        {this.props.robotsInput === "" ? (
-          <section className="app-section">
-            {robots.map((robot, index) => (
-              <div className="robot-card" key={index}>
-                <img alt="" src={`https://robohash.org/${robot.id}`} />
-                <h1>{robot.name}</h1>
-                <p>{robot.email}</p>
-              </div>
-            ))}
-          </section>
-        ) : (
-          this.changeRobots()
-        )}
-      </Fragment>
-    );
+    return <Fragment>{this.filterRobots()}</Fragment>;
   }
 }
 
