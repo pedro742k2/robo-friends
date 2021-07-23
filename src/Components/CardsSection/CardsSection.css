@@ -8,6 +8,7 @@
 }
 
 .robot-card {
+  user-select: none;
   margin: 20px;
   background-color: rgba(40, 42, 54, 0.3);
 
@@ -27,7 +28,7 @@
 
 .robot-card:hover {
   transform: scale(1.02);
-  border-color: rgba(255, 184, 108, 1);
+  border-color: #ffb86c;
 }
 
 .robot-card img {
