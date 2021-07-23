@@ -26,7 +26,8 @@
 }
 
 .robot-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  border-color: rgba(255, 184, 108, 1);
 }
 
 .robot-card img {
