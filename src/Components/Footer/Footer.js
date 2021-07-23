@@ -10,7 +10,8 @@ class Footer extends Component {
           <span id="signature">Pedro Batista</span>
         </h1>
         <p>
-          Based on <i>"Zero To Mastery"</i> Web Development course
+          Based on <i>"Zero To Mastery"</i> Web Development course{" "}
+          <i>"Robofriends"</i> App
         </p>
       </footer>
     );

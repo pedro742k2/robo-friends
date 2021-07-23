@@ -2,7 +2,7 @@ import { Component } from "react";
 import "./App.css";
 
 /* Components */
-import Cards from "./Components/Card/Card";
+import CardsSection from "./Components/CardsSection/CardsSection";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 
@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
         <Header changeRobotsInputValue={this.changeRobotsInputValue} />
 
-        <Cards robotsInput={this.state.robotsInput} />
+        <CardsSection robotsInput={this.state.robotsInput} />
 
         <Footer />
       </div>

@@ -1,10 +1,11 @@
 import { Component, Fragment } from "react";
-import "./Card.css";
+import "./CardsSection.css";
+import noRobotsImg from "../../assets/Images/c3po.svg";
 
 /* Robots api */
 import Robots from "../../Services/RobotsApi";
 
-class Cards extends Component {
+class CardsSection extends Component {
   constructor(props) {
     super(props);
 
@@ -25,15 +26,27 @@ class Cards extends Component {
         .includes(this.props.robotsInput.toLowerCase().trim())
     );
 
-    return (
+    return newRobots.length > 0 ? (
       <section className="app-section">
         {newRobots.map((filteredRobots, newIndex) => (
           <div className="robot-card" key={newIndex}>
-            <img alt="" src={`https://robohash.org/${filteredRobots.id}`} />
+            <img
+              className="card-img"
+              alt=""
+              src={`https://robohash.org/${filteredRobots.id}`}
+            />
             <h1>{filteredRobots.name}</h1>
             <p>{filteredRobots.email}</p>
           </div>
         ))}
+      </section>
+    ) : (
+      <section className="app-section">
+        <div className="robot-card no-robots">
+          <img className="card-img" alt="" src={noRobotsImg} />
+          <h1>Looks like no robots were found</h1>
+          <p>My circuits may be failing</p>
+        </div>
       </section>
     );
   };
@@ -43,4 +56,4 @@ class Cards extends Component {
   }
 }
 
-export default Cards;
+export default CardsSection;
