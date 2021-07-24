@@ -1,7 +1,7 @@
 .successfully-copied-container {
   /* visibility: hidden; */
   animation: backInUp;
-  animation-duration: 0.7s;
+  animation-duration: 0.5s;
 
   background-color: #fff;
   background: linear-gradient(

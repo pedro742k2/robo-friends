@@ -1,6 +1,6 @@
 import { Component, Fragment } from "react";
 import "./CardsSection.css";
-import noRobotsImg from "../../assets/Images/c3po.svg";
+import c3poImg from "../../assets/Images/c3po.svg";
 
 /* Robots api */
 import Robots from "../../Services/RobotsApi";
@@ -96,7 +96,7 @@ class CardsSection extends Component {
     ) : (
       <section className="app-section">
         <div className="robot-card no-robots" onClick={this.showAllInfo}>
-          <img className="card-img" alt="" src={noRobotsImg} />
+          <img className="card-img" alt="" src={c3poImg} />
           <h1>Looks like no robots were found</h1>
           <p>My circuits may be failing</p>
         </div>
