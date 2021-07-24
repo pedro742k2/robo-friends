@@ -30,12 +30,31 @@ class CardsSection extends Component {
       return robot.id === Number(event.currentTarget.id);
     });
 
-    this.setState({
-      showRobotInfo: {
-        show: true,
-        robotInfo: robotForInfo[0],
-      },
-    });
+    robotForInfo.length
+      ? this.setState({
+          showRobotInfo: {
+            show: true,
+            robotInfo: robotForInfo[0],
+          },
+        })
+      : this.setState({
+          showRobotInfo: {
+            show: true,
+            robotInfo: {
+              id: "Not identified",
+              name: "C3PO",
+              username: "Search Admin",
+              email: "c3p0@robosearchadmin.rf",
+              address: {
+                geo: {
+                  lat: "Somewhere in the galaxy",
+                  lng: "Somewhere in the galaxy",
+                },
+              },
+              phone: "Private number",
+            },
+          },
+        });
   };
 
   closeAllInfo = () => {
@@ -62,7 +81,7 @@ class CardsSection extends Component {
             id={filteredRobot.id}
             className="robot-card"
             key={newIndex}
-            onDoubleClick={this.showAllInfo}
+            onClick={this.showAllInfo}
           >
             <img
               className="card-img"
@@ -76,7 +95,7 @@ class CardsSection extends Component {
       </section>
     ) : (
       <section className="app-section">
-        <div className="robot-card no-robots">
+        <div className="robot-card no-robots" onClick={this.showAllInfo}>
           <img className="card-img" alt="" src={noRobotsImg} />
           <h1>Looks like no robots were found</h1>
           <p>My circuits may be failing</p>
@@ -89,7 +108,8 @@ class CardsSection extends Component {
     return (
       <Fragment>
         <RobotsInfo
-          robotInfo={this.state.showRobotInfo}
+          show={this.state.showRobotInfo.show}
+          robotInfo={this.state.showRobotInfo.robotInfo}
           closeAllInfo={this.closeAllInfo}
         />
         {this.filterRobots()}

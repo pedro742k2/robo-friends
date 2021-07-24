@@ -1,6 +1,6 @@
 .app-section {
   width: 100%;
-  margin: 20px;
+  margin: 20px 0;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -9,6 +9,7 @@
 
 .robot-card {
   user-select: none;
+  cursor: pointer;
   margin: 20px;
   background-color: rgba(40, 42, 54, 0.3);
 
@@ -18,7 +19,7 @@
   align-items: center;
 
   border: 3px solid rgba(255, 184, 108, 0.2);
-  border-radius: 20px;
+  border-radius: 10px;
 
   color: #fff;
 
@@ -27,8 +28,10 @@
 }
 
 .robot-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.01);
   border-color: #ffb86c;
+  border-radius: 15px;
+  background-color: rgba(40, 42, 54, 0.4);
 }
 
 .robot-card img {
