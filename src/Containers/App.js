@@ -2,10 +2,10 @@ import { Component } from "react";
 import "./App.css";
 
 /* Components */
-import CardsSection from "./Components/CardsSection/CardsSection";
-import Footer from "./Components/Footer/Footer";
-import Header from "./Components/Header/Header";
-import Scroll from "./Components/Scroll/Scroll";
+import CardsSection from "../Components/CardsSection/CardsSection";
+import Footer from "../Components/Footer/Footer";
+import Header from "../Components/Header/Header";
+import Scroll from "../Components/Scroll/Scroll";
 
 class App extends Component {
   constructor(props) {
