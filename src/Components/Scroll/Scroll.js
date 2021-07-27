@@ -1,7 +1,7 @@
 import "./Scroll.css";
 
-const Scroll = (props) => {
-  return <div className="scroll-component">{props.children}</div>;
+const Scroll = ({ children }) => {
+  return <div className="scroll-component">{children}</div>;
 };
 
 export default Scroll;

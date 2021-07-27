@@ -1,145 +1,130 @@
-import { Component, Fragment } from "react";
+import { useState, Fragment } from "react";
 import "./RobotsInfo.css";
 
 /* Successfully Copied Component */
 import SuccessfullyCopied from "../Copied/Copied";
 
-class RobotsInfo extends Component {
-  constructor(props) {
-    super(props);
+const RobotsInfo = ({ show, robotInfo, closeAllInfo }) => {
+  const [copiedText, setCopiedText] = useState("");
 
-    this.state = {
-      copiedText: "",
-    };
+  const resetState = () => setCopiedText("");
+
+  // render() {
+  const { id, name, username, email, phone } = robotInfo;
+  const latLng = robotInfo?.address?.geo;
+
+  try {
+    show
+      ? (document.getElementsByClassName("app-section")[0].style.opacity = 0.2)
+      : (document.getElementsByClassName("app-section")[0].style.opacity = 1);
+  } catch (error) {
+    console.warn(error);
   }
 
-  resetState = () => {
-    this.setState({ copiedText: "" });
+  const copyToClipboard = async (text) => {
+    await navigator.clipboard.writeText(text);
   };
 
-  render() {
-    const { id, name, username, email, phone } = this.props.robotInfo;
-    const latLng = this.props.robotInfo?.address?.geo;
-    const { show } = this.props;
+  const copyContent = (event) => {
+    const property = event.currentTarget.id;
 
-    try {
-      show
-        ? (document.getElementsByClassName(
-            "app-section"
-          )[0].style.opacity = 0.2)
-        : (document.getElementsByClassName("app-section")[0].style.opacity = 1);
-    } catch (error) {
-      console.warn(error);
-    }
-
-    const copyToClipboard = async (text) => {
-      await navigator.clipboard.writeText(text);
-    };
-
-    const copyContent = (event) => {
-      const property = event.currentTarget.id;
-
-      if (
-        property === "geo-lat" ||
-        property === "geo-lng" ||
-        property === "all"
-      ) {
-        switch (property) {
-          case "geo-lat":
-            copyToClipboard(`latitude: ${latLng.lat}`);
-            this.setState({ copiedText: "latitude" });
-            break;
-          case "geo-lng":
-            copyToClipboard(`longitude: ${latLng.lng}`);
-            this.setState({ copiedText: "longitude" });
-            break;
-          default:
-            copyToClipboard(
-              `id: ${id}\nname: ${name}\nusername: ${username}\nemail: ${email}\nlatitude: ${latLng.lat}\nlongitude: ${latLng.lng}\nphone: ${phone}`
-            );
-            this.setState({ copiedText: "Every information" });
-        }
-      } else {
-        const propertyToCopy = Object.entries(this.props.robotInfo).filter(
-          (robotProperty) => {
-            return property === robotProperty[0];
-          }
-        );
-
-        copyToClipboard(`${propertyToCopy[0][0]}: ${propertyToCopy[0][1]}`);
-        this.setState({ copiedText: propertyToCopy[0][0] });
+    if (
+      property === "geo-lat" ||
+      property === "geo-lng" ||
+      property === "all"
+    ) {
+      switch (property) {
+        case "geo-lat":
+          copyToClipboard(`latitude: ${latLng.lat}`);
+          setCopiedText("latitude");
+          break;
+        case "geo-lng":
+          copyToClipboard(`longitude: ${latLng.lng}`);
+          setCopiedText("longitude");
+          break;
+        default:
+          copyToClipboard(
+            `id: ${id}\nname: ${name}\nusername: ${username}\nemail: ${email}\nlatitude: ${latLng.lat}\nlongitude: ${latLng.lng}\nphone: ${phone}`
+          );
+          setCopiedText("Every information");
       }
-    };
+    } else {
+      const propertyToCopy = Object.entries(robotInfo).filter(
+        (robotProperty) => {
+          return property === robotProperty[0];
+        }
+      );
 
-    return (
-      <Fragment>
-        {show ? (
-          <div className="overlay">
-            <div className="info-container">
-              <div className="info-boxes-container">
-                <div id="id" className="info-box" onClick={copyContent}>
-                  <h2>ID</h2>
-                  <hr />
-                  <p>{id}</p>
-                </div>
+      copyToClipboard(`${propertyToCopy[0][0]}: ${propertyToCopy[0][1]}`);
+      setCopiedText(propertyToCopy[0][0]);
+    }
+  };
 
-                <div id="name" className="info-box" onClick={copyContent}>
-                  <h2>Name</h2>
-                  <hr />
-                  <p>{name}</p>
-                </div>
-
-                <div id="username" className="info-box" onClick={copyContent}>
-                  <h2>Username</h2>
-                  <hr />
-                  <p>{username}</p>
-                </div>
-
-                <div id="email" className="info-box" onClick={copyContent}>
-                  <h2>Email</h2>
-                  <hr />
-                  <p>{email}</p>
-                </div>
-
-                <div id="geo-lat" className="info-box" onClick={copyContent}>
-                  <h2>Geolocation (Latitude)</h2>
-                  <hr />
-                  <p>{latLng?.lat}</p>
-                </div>
-
-                <div id="geo-lng" className="info-box" onClick={copyContent}>
-                  <h2>Geolocation (Longitude)</h2>
-                  <hr />
-                  <p>{latLng?.lng}</p>
-                </div>
-
-                <div id="phone" className="info-box" onClick={copyContent}>
-                  <h2>Phone</h2>
-                  <hr />
-                  <p>{phone}</p>
-                </div>
-
-                <div id="all" className="info-box" onClick={copyContent}>
-                  <h2>
-                    {"< "}Click to copy{" >"}
-                  </h2>
-                  <hr />
-                  <p>Or click here to copy everything</p>
-                </div>
+  return (
+    <Fragment>
+      {show ? (
+        <div className="overlay">
+          <div className="info-container">
+            <div className="info-boxes-container">
+              <div id="id" className="info-box" onClick={copyContent}>
+                <h2>ID</h2>
+                <hr />
+                <p>{id}</p>
               </div>
 
-              <button onClick={this.props.closeAllInfo}>Close this box</button>
+              <div id="name" className="info-box" onClick={copyContent}>
+                <h2>Name</h2>
+                <hr />
+                <p>{name}</p>
+              </div>
+
+              <div id="username" className="info-box" onClick={copyContent}>
+                <h2>Username</h2>
+                <hr />
+                <p>{username}</p>
+              </div>
+
+              <div id="email" className="info-box" onClick={copyContent}>
+                <h2>Email</h2>
+                <hr />
+                <p>{email}</p>
+              </div>
+
+              <div id="geo-lat" className="info-box" onClick={copyContent}>
+                <h2>Geolocation (Latitude)</h2>
+                <hr />
+                <p>{latLng?.lat}</p>
+              </div>
+
+              <div id="geo-lng" className="info-box" onClick={copyContent}>
+                <h2>Geolocation (Longitude)</h2>
+                <hr />
+                <p>{latLng?.lng}</p>
+              </div>
+
+              <div id="phone" className="info-box" onClick={copyContent}>
+                <h2>Phone</h2>
+                <hr />
+                <p>{phone}</p>
+              </div>
+
+              <div id="all" className="info-box" onClick={copyContent}>
+                <h2>
+                  {"< "}Click to copy{" >"}
+                </h2>
+                <hr />
+                <p>Or click here to copy everything</p>
+              </div>
             </div>
 
-            <SuccessfullyCopied
-              copiedText={this.state.copiedText}
-              resetState={this.resetState}
-            />
+            <button onClick={closeAllInfo}>Close this box</button>
           </div>
-        ) : null}
-      </Fragment>
-    );
-  }
-}
+
+          <SuccessfullyCopied copiedText={copiedText} resetState={resetState} />
+        </div>
+      ) : null}
+    </Fragment>
+  );
+};
 
 export default RobotsInfo;

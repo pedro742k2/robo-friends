@@ -1,4 +1,4 @@
-import { Component, Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import "./CardsSection.css";
 import c3poImg from "../../assets/Images/c3po.svg";
 
@@ -8,70 +8,55 @@ import Robots from "../../Services/RobotsApi";
 /* Robots Info overlay */
 import RobotsInfo from "./RobotsInfo/RobotsInfo";
 
-class CardsSection extends Component {
-  constructor(props) {
-    super(props);
+const CardsSection = ({ robotsInput }) => {
+  const [robots, setRobots] = useState([]);
+  const [showRobotInfo, setShowRobotInfo] = useState({
+    show: false,
+    robotInfo: [],
+  });
 
-    this.state = {
-      robots: [],
-      showRobotInfo: {
-        show: false,
-        robotInfo: [],
-      },
-    };
-  }
+  useEffect(() => {
+    Robots.then((resolvedRobots) => setRobots(resolvedRobots));
+  }, []);
 
-  componentDidMount() {
-    Robots.then((resolvedRobots) => this.setState({ robots: resolvedRobots }));
-  }
-
-  showAllInfo = (event) => {
-    const robotForInfo = this.state.robots.filter((robot) => {
+  const showAllInfo = (event) => {
+    const robotForInfo = robots.filter((robot) => {
       return robot.id === Number(event.currentTarget.id);
     });
 
     robotForInfo.length
-      ? this.setState({
-          showRobotInfo: {
-            show: true,
-            robotInfo: robotForInfo[0],
-          },
+      ? setShowRobotInfo({
+          show: true,
+          robotInfo: robotForInfo[0],
         })
-      : this.setState({
-          showRobotInfo: {
-            show: true,
-            robotInfo: {
-              id: "Not identified",
-              name: "C3PO",
-              username: "Search Admin",
-              email: "c3p0@robosearchadmin.rf",
-              address: {
-                geo: {
-                  lat: "Somewhere in the galaxy",
-                  lng: "Somewhere in the galaxy",
-                },
+      : setShowRobotInfo({
+          show: true,
+          robotInfo: {
+            id: "Not identified",
+            name: "C3PO",
+            username: "Search Admin",
+            email: "c3p0@robosearchadmin.rf",
+            address: {
+              geo: {
+                lat: "Somewhere in the galaxy",
+                lng: "Somewhere in the galaxy",
               },
-              phone: "Private number",
             },
+            phone: "Private number",
           },
         });
   };
 
-  closeAllInfo = () => {
-    this.setState({
-      showRobotInfo: {
-        show: false,
-        robotInfo: [],
-      },
+  const closeAllInfo = () => {
+    setShowRobotInfo({
+      show: false,
+      robotInfo: [],
     });
   };
 
-  filterRobots = () => {
-    const newRobots = this.state.robots.filter((robot) =>
-      robot.name
-        .toLowerCase()
-        .trim()
-        .includes(this.props.robotsInput.toLowerCase().trim())
+  const filterRobots = () => {
+    const newRobots = robots.filter((robot) =>
+      robot.name.toLowerCase().trim().includes(robotsInput.toLowerCase().trim())
     );
 
     return newRobots.length > 0 ? (
@@ -81,7 +66,7 @@ class CardsSection extends Component {
             id={filteredRobot.id}
             className="robot-card"
             key={newIndex}
-            onClick={this.showAllInfo}
+            onClick={showAllInfo}
           >
             <img
               className="card-img"
@@ -95,7 +80,7 @@ class CardsSection extends Component {
       </section>
     ) : (
       <section className="app-section">
-        <div className="robot-card no-robots" onClick={this.showAllInfo}>
+        <div className="robot-card no-robots" onClick={showAllInfo}>
           <img className="card-img" alt="" src={c3poImg} />
           <h1>Looks like no robots were found</h1>
           <p>My circuits may be failing</p>
@@ -104,18 +89,16 @@ class CardsSection extends Component {
     );
   };
 
-  render() {
-    return (
-      <Fragment>
-        <RobotsInfo
-          show={this.state.showRobotInfo.show}
-          robotInfo={this.state.showRobotInfo.robotInfo}
-          closeAllInfo={this.closeAllInfo}
-        />
-        {this.filterRobots()}
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <RobotsInfo
+        show={showRobotInfo.show}
+        robotInfo={showRobotInfo.robotInfo}
+        closeAllInfo={closeAllInfo}
+      />
+      {filterRobots()}
+    </Fragment>
+  );
+};
 
 export default CardsSection;

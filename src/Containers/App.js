@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import "./App.css";
 
 /* Components */
@@ -7,32 +7,21 @@ import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 import Scroll from "../Components/Scroll/Scroll";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [robotsInput, setRobotsInput] = useState("");
 
-    this.state = {
-      robotsInput: "",
-    };
-  }
+  const changeRobotsInputValue = (text) => setRobotsInput(text.target.value);
 
-  changeRobotsInputValue = (text) =>
-    this.setState({
-      robotsInput: text.target.value,
-    });
+  return (
+    <div className="App">
+      <Header changeRobotsInputValue={changeRobotsInputValue} />
+      <Scroll>
+        <CardsSection robotsInput={robotsInput} />
+      </Scroll>
 
-  render() {
-    return (
-      <div className="App">
-        <Header changeRobotsInputValue={this.changeRobotsInputValue} />
-        <Scroll>
-          <CardsSection robotsInput={this.state.robotsInput} />
-        </Scroll>
-
-        <Footer />
-      </div>
-    );
-  }
-}
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
