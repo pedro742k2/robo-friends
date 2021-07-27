@@ -1,18 +1,8 @@
-import { Component, Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import "./Copied.css";
 
-class Copied extends Component {
-  componentWillUnmount() {
-    /* Clear every timeout available */
-    this.props.resetState();
-    let id = window.setTimeout(function () {}, 0);
-
-    while (id--) {
-      window.clearTimeout(id);
-    }
-  }
-
-  componentDidUpdate() {
+const Copied = () => {
+  useEffect(() => {
     let id = window.setTimeout(function () {}, 0);
 
     while (id--) {
@@ -32,24 +22,32 @@ class Copied extends Component {
     } catch (error) {
       console.warn("Nothing to clear", error);
     }
-  }
 
-  render() {
-    const { copiedText } = this.props;
+    return () => {
+      /* Clear every timeout available before unmounting*/
+      this.props.resetState();
+      let id = window.setTimeout(function () {}, 0);
 
-    return (
-      <Fragment>
-        {copiedText.length ? (
-          <div className="successfully-copied-container">
-            <p>
-              <span>Copied </span>
-              <b>{copiedText}</b>
-            </p>
-          </div>
-        ) : null}
-      </Fragment>
-    );
-  }
-}
+      while (id--) {
+        window.clearTimeout(id);
+      }
+    };
+  });
+
+  const { copiedText } = this.props;
+
+  return (
+    <Fragment>
+      {copiedText.length ? (
+        <div className="successfully-copied-container">
+          <p>
+            <span>Copied </span>
+            <b>{copiedText}</b>
+          </p>
+        </div>
+      ) : null}
+    </Fragment>
+  );
+};
 
 export default Copied;
