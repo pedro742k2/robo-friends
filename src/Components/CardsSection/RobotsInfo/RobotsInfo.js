@@ -7,9 +7,6 @@ import SuccessfullyCopied from "../Copied/Copied";
 const RobotsInfo = ({ show, robotInfo, closeAllInfo }) => {
   const [copiedText, setCopiedText] = useState("");
 
-  const resetState = () => setCopiedText("");
-
-  // render() {
   const { id, name, username, email, phone } = robotInfo;
   const latLng = robotInfo?.address?.geo;
 
@@ -23,6 +20,16 @@ const RobotsInfo = ({ show, robotInfo, closeAllInfo }) => {
 
   const copyToClipboard = async (text) => {
     await navigator.clipboard.writeText(text);
+  };
+
+  const resetState = () => {
+    console.log("Unmounting");
+    let id = window.setTimeout(function () {}, 0);
+
+    while (id--) {
+      window.clearTimeout(id);
+    }
+    setCopiedText("");
   };
 
   const copyContent = (event) => {

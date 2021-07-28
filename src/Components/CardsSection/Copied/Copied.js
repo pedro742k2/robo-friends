@@ -1,8 +1,9 @@
 import { Fragment, useEffect } from "react";
 import "./Copied.css";
 
-const Copied = () => {
+const Copied = ({ resetState, copiedText }) => {
   useEffect(() => {
+    /* Clear every timeout available before unmounting*/
     let id = window.setTimeout(function () {}, 0);
 
     while (id--) {
@@ -19,22 +20,30 @@ const Copied = () => {
       setTimeout(() => {
         container.style.display = "none";
       }, 5000);
-    } catch (error) {
-      console.warn("Nothing to clear", error);
+    } catch {
+      console.warn("Nothing to clear");
     }
-
-    return () => {
-      /* Clear every timeout available before unmounting*/
-      this.props.resetState();
-      let id = window.setTimeout(function () {}, 0);
-
-      while (id--) {
-        window.clearTimeout(id);
-      }
-    };
   });
 
-  const { copiedText } = this.props;
+  useEffect(() => {
+    try {
+      const container = document.getElementsByClassName(
+        "successfully-copied-container"
+      )[0];
+
+      container.style.display = "flex";
+
+      setTimeout(() => {
+        container.style.display = "none";
+      }, 5000);
+    } catch {
+      console.warn("Nothing to clear");
+    }
+
+    return () => resetState();
+  }, []);
+
+  console.log(copiedText);
 
   return (
     <Fragment>
