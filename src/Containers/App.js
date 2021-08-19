@@ -1,11 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 
+/* Containers */
+import CardsSection from "./CardsSection/CardsSection";
+import Footer from "./Footer/Footer";
+import Header from "./Header/Header";
+
 /* Components */
-import CardsSection from "../Components/CardsSection/CardsSection";
-import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header/Header";
 import Scroll from "../Components/Scroll/Scroll";
+import ErrorBoundry from "../Components/ErrorBoundry/ErrorBoundry";
 
 const App = () => {
   const [robotsInput, setRobotsInput] = useState("");
@@ -16,7 +19,9 @@ const App = () => {
     <div className="App">
       <Header changeRobotsInputValue={changeRobotsInputValue} />
       <Scroll>
-        <CardsSection robotsInput={robotsInput} />
+        <ErrorBoundry>
+          <CardsSection robotsInput={robotsInput} />
+        </ErrorBoundry>
       </Scroll>
 
       <Footer />
