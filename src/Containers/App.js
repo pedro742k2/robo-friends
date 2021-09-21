@@ -23,7 +23,6 @@ const App = () => {
           <CardsSection robotsInput={robotsInput} />
         </ErrorBoundry>
       </Scroll>
-
       <Footer />
     </div>
   );
