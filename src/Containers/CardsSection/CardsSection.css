@@ -64,3 +64,47 @@
 .robot-card.no-robots {
   width: 50%;
 }
+
+@media screen and (max-width: 800px) {
+  .robot-card h1 {
+    font-size: 1rem;
+  }
+
+  .robot-card p {
+    font-size: 0.75rem;
+  }
+
+  .info-box h2 {
+    font-size: 1rem;
+  }
+
+  .info-box p {
+    font-size: 0.75rem;
+  }
+
+  .info-container button {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .robots-name-input {
+    font-size: 0.75rem;
+  }
+
+  .robot-card {
+    width: 75vw;
+    margin: 10px;
+  }
+
+  .info-boxes-container {
+    /* flex-direction: column; */
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .app-section {
+    overflow-x: scroll;
+  }
+}

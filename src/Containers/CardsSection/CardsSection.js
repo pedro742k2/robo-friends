@@ -89,6 +89,8 @@ const CardsSection = ({ robotsInput }) => {
     );
   };
 
+  throw Error("teste");
+
   return (
     <Fragment>
       <RobotsInfo

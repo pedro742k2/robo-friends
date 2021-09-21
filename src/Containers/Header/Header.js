@@ -7,7 +7,7 @@ const Header = ({ changeRobotsInputValue }) => {
       <input
         className="robots-name-input"
         type="text"
-        placeholder="Search robots"
+        placeholder="Search robots 🤖"
         onChange={changeRobotsInputValue}
       ></input>
     </header>
