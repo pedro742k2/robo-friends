@@ -71,7 +71,7 @@ const CardsSection = ({ robotsInput }) => {
             <img
               className="card-img"
               alt=""
-              src={`https://robohash.org/${filteredRobot.id}`}
+              src={`https://robohash.org/${filteredRobot.id}?size=200x200`}
             />
             <h1>{filteredRobot.name}</h1>
             <p>{filteredRobot.email}</p>
