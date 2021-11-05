@@ -7,3 +7,10 @@
 ## Check it out online (Hosted with GitHub pages)
 
   📡 Live webp app: https://pedro742k2.github.io/robo-friends/
+
+## Install robofriends locally
+
+  - Clone this repo
+  - Inside the project folder, run:
+    - Run `npm install`
+    - RUn `npm start`
